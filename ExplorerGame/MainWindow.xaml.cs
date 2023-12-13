@@ -32,13 +32,16 @@ namespace ExplorerGame
  
             this.InitializeComponent();
             _gameLoop = new GameLoop();
-            MainCanvas.Loaded += MainCanvas_Loaded; 
-
-
+            //MainCanvas.Loaded += MainCanvas_Loaded; 
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
 
             //_gameLoop.Initialize();
 
 
+        }
+        private void CompositionTarget_Rendering(object sender, object e)
+        {
+            //moveBall(200);
         }
 
         private void MainCanvas_Loaded(object sender, RoutedEventArgs e)
@@ -70,23 +73,34 @@ namespace ExplorerGame
 
         //}
 
-        //private void moveBall() {
-        //    int left = 1;
-        //    int currentPosition = 10;
+        private void moveBall(int leftPosition)
+        {
+            int left = 1;
+            int currentPosition = 10;
+            Canvas.SetLeft(SoccerBall, leftPosition);
 
-        //    while (true) { 
-        //    if (left == 1)
-        //    {
-        //        currentPosition++;
-        //    }
-        //    else { 
-        //        currentPosition--;
-        //    }
-        //    }
+            //for (int i = 0; i < 700; i++)
+            //{
+            //    Canvas.SetLeft(SoccerBall, currentPosition+i);
+            //}
 
-            //while (left == 1) {
+            //while (true)
+            //{
+            //    if (left == 1)
+            //    {
+            //        currentPosition++;
+            //    }
+            //    else
+            //    {
+            //        currentPosition--;
+            //    }
+            //}
+
+            //while (left == 1)
+            //{
             //    currentPosition++;
-            //    if (currentPosition >= 500) {
+            //    if (currentPosition >= 500)
+            //    {
             //        left = 0;
             //    }
             //    Canvas.SetLeft(SoccerBall, currentPosition);
@@ -102,12 +116,13 @@ namespace ExplorerGame
             //    Canvas.SetLeft(SoccerBall, currentPosition);
             //}
 
-        //}
+        }
 
 
-        //private void myButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    myButton.Content = "Clicked";
-        //}
+        private void myButton_Click(object sender, RoutedEventArgs e)
+        {
+            myButton.Content = "Clicked";
+            moveBall(700);
+        }
     }
 }
