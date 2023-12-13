@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ExplorerGame (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "ExplorerGame (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
