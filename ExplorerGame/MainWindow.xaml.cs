@@ -35,9 +35,9 @@ namespace ExplorerGame
  
             this.InitializeComponent();
             _gameLoop = new GameLoop();
-            //MainCanvas.Loaded += MainCanvas_Loaded; 
-            CompositionTarget.Rendering += GameLoopUpdate;
-            //MainFrame.Navigated += OnNavigated;
+            _gameLoop.Load(this);
+            _gameLoop.Start();
+
 
             //_gameLoop.Initialize();
 
@@ -67,7 +67,7 @@ namespace ExplorerGame
 
         //}
 
-        private void moveBall()
+        public void moveBall()
         {
             int nextMovePosition = canvasLeftPosition + (direction * 20);
 

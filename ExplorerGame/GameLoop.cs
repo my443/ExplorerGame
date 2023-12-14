@@ -12,10 +12,18 @@ namespace ExplorerGame
     public class GameLoop
     {
         public bool Running { get; private set; }
-        public MainWindow Game { get; set; }
-        public async void Start(MainWindow CurrentGame)
+        public MainWindow _myGame { get; set; }
+
+        /// <summary>
+        /// Load Game into GameLoop
+        /// </summary>
+        public void Load(MainWindow gameObj)
         {
-            Game = CurrentGame;
+            _myGame = gameObj;
+        }
+        public async void Start()
+        {
+   
             // Set gameloop state
             Running = true;
 
@@ -29,7 +37,7 @@ namespace ExplorerGame
                 // Update the current previous game time
                 _previousGameTime = _previousGameTime + GameTime;
                 // Update the game
-                
+                _myGame.moveBall();             
                 // Update Game at 60fps
                 await Task.Delay(8);
             }
