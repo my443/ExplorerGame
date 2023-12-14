@@ -29,9 +29,6 @@ namespace ExplorerGame
         GameLoop _gameLoop;
         Game Game = new Game();
 
-        int canvasLeftPosition = 20;
-        int direction = 1;
-
         public MainWindow()
         {
 

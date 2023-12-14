@@ -37,28 +37,15 @@ namespace ExplorerGame
                 // Update the current previous game time
                 _previousGameTime = _previousGameTime + GameTime;
                 // Update the game
-                _myGame.moveBall();             
+                Update();
                 // Update Game at 60fps
                 await Task.Delay(8);
             }
         }
 
-        public void Update(object sender, object e)
+        public void Update()
         {
-            //CoreApplicationView coreView = CoreApplication.MainView;
-            //CoreWindow coreWindow = coreView.CoreWindow;
-
-            ////CoreApplicationView coreView = CoreApplication.MainView;
-            ////CoreWindow coreWindow = coreView.CoreWindow;
-
-            //if (coreWindow.Dispatcher != null)
-            //{
-            //    coreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            //    {
-            //        //Canvas.SetLeft(sender.SoccerBall, 800);
-            //    });
-            //}
-
+                _myGame.moveBall();
         }
 
         public void Render()
