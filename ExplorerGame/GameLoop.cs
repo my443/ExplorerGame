@@ -12,12 +12,12 @@ namespace ExplorerGame
     public class GameLoop
     {
         public bool Running { get; private set; }
-        public MainWindow _myGame { get; set; }
+        public Game _myGame { get; set; }
 
         /// <summary>
         /// Load Game into GameLoop
         /// </summary>
-        public void Load(MainWindow gameObj)
+        public void Load(Game gameObj)
         {
             _myGame = gameObj;
         }

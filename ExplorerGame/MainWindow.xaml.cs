@@ -27,6 +27,8 @@ namespace ExplorerGame
     public sealed partial class MainWindow : Window
     {
         GameLoop _gameLoop;
+        Game Game = new Game();
+
         int canvasLeftPosition = 20;
         int direction = 1;
 
@@ -35,25 +37,17 @@ namespace ExplorerGame
  
             this.InitializeComponent();
             _gameLoop = new GameLoop();
-            _gameLoop.Load(this);
+            _gameLoop.Load(Game);
             _gameLoop.Start();
-
-
-            //_gameLoop.Initialize();
-
+            CompositionTarget.Rendering += GameLoopUpdate;                  // This subscribes to the CompositionTarget.Rendering event.
+                                                                            // Called once per frame refresh (usually 60fps)
+                                                                            // https://learn.microsoft.com/en-us/dotnet/api/system.windows.media.compositiontarget.rendering?view=windowsdesktop-8.0
 
         }
-        private void CompositionTarget_Rendering(object sender, object e)
-        {
-            //moveBall(200);
-            CompositionTarget.Rendering += GameLoopUpdate;
-        }
-
-
 
         private void GameLoopUpdate(object sender, object e)
         {
-            _gameLoop.Update(sender, e);
+            Canvas.SetLeft(SoccerBall, Game.ballLeft);
         }
 
         //public void MainWindow_Load()
@@ -67,31 +61,52 @@ namespace ExplorerGame
 
         //}
 
-        public void moveBall()
-        {
-            int nextMovePosition = canvasLeftPosition + (direction * 20);
+        //public void moveBall()
+        //{
+        //    int nextMovePosition = canvasLeftPosition + (direction * 20);
 
-            if (nextMovePosition > 400) {
-                direction = -1;
-                nextMovePosition = 400;
-            }
-            else if (nextMovePosition < 20)
-            {
-                direction = 1;
-                nextMovePosition = 20;
-            }
+        //    if (nextMovePosition > 400) {
+        //        direction = -1;
+        //        nextMovePosition = 400;
+        //    }
+        //    else if (nextMovePosition < 20)
+        //    {
+        //        direction = 1;
+        //        nextMovePosition = 20;
+        //    }
 
-            canvasLeftPosition = nextMovePosition;
+        //    canvasLeftPosition = nextMovePosition;
 
-            Canvas.SetLeft(SoccerBall, nextMovePosition);
-        }
+        //    Canvas.SetLeft(SoccerBall, nextMovePosition);
+        //}
+
+        //public void moveBall()
+        //{
+        //    int nextMovePosition = canvasLeftPosition + (direction * 20);
+
+        //    if (nextMovePosition > 400)
+        //    {
+        //        direction = -1;
+        //        nextMovePosition = 400;
+        //    }
+        //    else if (nextMovePosition < 20)
+        //    {
+        //        direction = 1;
+        //        nextMovePosition = 20;
+        //    }
+
+        //    canvasLeftPosition = nextMovePosition;
+
+        //    Canvas.SetLeft(SoccerBall, nextMovePosition);
+        //}
 
 
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
-            myButton.Content = "Clicked. Ball at:"+canvasLeftPosition.ToString();
-
-            moveBall();
+            myButton.Content = "Clicked. Ball at:"+ Game.ballLeft.ToString();
+            //Game.moveBall();
+            Canvas.SetLeft(SoccerBall, Game.ballLeft);
+            //moveBall();
         }
     }
 }
