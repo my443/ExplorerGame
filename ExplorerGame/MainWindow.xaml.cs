@@ -27,13 +27,17 @@ namespace ExplorerGame
     public sealed partial class MainWindow : Window
     {
         GameLoop _gameLoop;
+        int canvasLeftPosition = 20;
+        int direction = 1;
+
         public MainWindow()
         {
  
             this.InitializeComponent();
             _gameLoop = new GameLoop();
             //MainCanvas.Loaded += MainCanvas_Loaded; 
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
+            CompositionTarget.Rendering += GameLoopUpdate;
+            //MainFrame.Navigated += OnNavigated;
 
             //_gameLoop.Initialize();
 
@@ -42,19 +46,9 @@ namespace ExplorerGame
         private void CompositionTarget_Rendering(object sender, object e)
         {
             //moveBall(200);
+            CompositionTarget.Rendering += GameLoopUpdate;
         }
 
-        private void MainCanvas_Loaded(object sender, RoutedEventArgs e)
-        {
-            CompositionTarget.Rendering += GameLoopUpdate;
-            //throw new NotImplementedException();
-        }
-
-        private void Load(object sender, NavigationEventArgs e)
-        {
-            CompositionTarget.Rendering += GameLoopUpdate;
-            
-        }
 
 
         private void GameLoopUpdate(object sender, object e)
@@ -73,56 +67,31 @@ namespace ExplorerGame
 
         //}
 
-        private void moveBall(int leftPosition)
+        private void moveBall()
         {
-            int left = 1;
-            int currentPosition = 10;
-            Canvas.SetLeft(SoccerBall, leftPosition);
+            int nextMovePosition = canvasLeftPosition + (direction * 20);
 
-            //for (int i = 0; i < 700; i++)
-            //{
-            //    Canvas.SetLeft(SoccerBall, currentPosition+i);
-            //}
+            if (nextMovePosition > 400) {
+                direction = -1;
+                nextMovePosition = 400;
+            }
+            else if (nextMovePosition < 20)
+            {
+                direction = 1;
+                nextMovePosition = 20;
+            }
 
-            //while (true)
-            //{
-            //    if (left == 1)
-            //    {
-            //        currentPosition++;
-            //    }
-            //    else
-            //    {
-            //        currentPosition--;
-            //    }
-            //}
+            canvasLeftPosition = nextMovePosition;
 
-            //while (left == 1)
-            //{
-            //    currentPosition++;
-            //    if (currentPosition >= 500)
-            //    {
-            //        left = 0;
-            //    }
-            //    Canvas.SetLeft(SoccerBall, currentPosition);
-            //}
-
-            //while (left == 0)
-            //{
-            //    currentPosition++;
-            //    if (currentPosition <= 10)
-            //    {
-            //        left = 1;
-            //    }
-            //    Canvas.SetLeft(SoccerBall, currentPosition);
-            //}
-
+            Canvas.SetLeft(SoccerBall, nextMovePosition);
         }
 
 
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
-            myButton.Content = "Clicked";
-            moveBall(700);
+            myButton.Content = "Clicked. Ball at:"+canvasLeftPosition.ToString();
+
+            moveBall();
         }
     }
 }

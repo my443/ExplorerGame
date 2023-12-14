@@ -9,7 +9,7 @@
     mc:Ignorable="d">
     <Canvas Name="MainCanvas" Width="Auto" Height="Auto" Background="Red">
         <!-- https://freesvg.org/soccer-ball -->
-        <Image Name="SoccerBall" Canvas.ZIndex="1"  Source="/Assets/soccer_ball2.svg" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="200"/>
+        <Image Name="SoccerBall" Canvas.ZIndex="1"  Source="/Assets/soccer_ball2.svg" HorizontalAlignment="Center" VerticalAlignment="Center" Canvas.Left="20" Canvas.Top="200"/>
         <Button x:Name="myButton" Content="Click me!"
           Click="myButton_Click" 
           Margin="5" Width="150"
