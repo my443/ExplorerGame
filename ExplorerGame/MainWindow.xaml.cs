@@ -44,6 +44,7 @@ namespace ExplorerGame
         private void GameLoopUpdate(object sender, object e)
         {
             Canvas.SetLeft(SoccerBall, Game.ballLeft);
+            Canvas.SetTop(SoccerBall, Game.ballTop);
         }
 
         private void myButton_Click(object sender, RoutedEventArgs e)
